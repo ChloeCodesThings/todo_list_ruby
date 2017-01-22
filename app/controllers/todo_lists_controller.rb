@@ -10,6 +10,11 @@ class TodoListsController < ApplicationController
   # GET /todo_lists/1
   # GET /todo_lists/1.json
   def show
+    if params[:filter_completed] == 'true'
+      @tasks = @todo_list.tasks.where(completed: false)
+    else
+      @tasks = @todo_list.tasks
+    end
   end
 
   # GET /todo_lists/new
