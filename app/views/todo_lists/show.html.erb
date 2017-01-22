@@ -1,9 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @todo_list.title %>
+  <h1><%= @todo_list.title %></h1>
+  <%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
+    <%= link_to 'Back', todo_lists_path %>
 </p>
 
-<%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
-<%= link_to 'Back', todo_lists_path %>
+<h3>Tasks</h3>
+
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Completed</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todo_list.tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.completed %></td>
+        <td><%= link_to 'Show', todo_list_task_path(task.todo_list, task) %></td>
+        <td><%= link_to 'Edit', edit_todo_list_task_path(task.todo_list, task) %></td>
+        <td><%= link_to 'Destroy', todo_list_task_path(task.todo_list, task), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
