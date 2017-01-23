@@ -31,4 +31,8 @@ class UserFlowsTest < ActionDispatch::IntegrationTest
     assert_select "body", {count: 0, text: /MyString/ }
   end
 
+  # test "complete an item" do
+  #   delete "/todo_lists/1/tasks/1"
+  #   assert_select "body", {count: 0, text: /MyString/ }
+  # end
 end
