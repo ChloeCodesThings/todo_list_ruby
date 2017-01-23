@@ -13,3 +13,8 @@ Features:
 * Complete an item
 * Ability to un-complete an already completed item.
 * Tests for each requirement
+
+To run:
+
+* Migrate the database with `rake db:migrate`
+* Run server with `bin/rails server`
