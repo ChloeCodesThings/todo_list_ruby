@@ -4,8 +4,10 @@ one:
   title: MyString
   completed: false
   todo_list: one
+  id: 1
 
 two:
-  title: MyString
-  completed: false
+  title: MyString2
+  completed: true
   todo_list: two
+  id: 2

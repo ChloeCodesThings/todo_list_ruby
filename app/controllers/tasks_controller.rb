@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_todo_list
 
   # GET /tasks
   # GET /tasks.json
@@ -24,12 +25,11 @@ class TasksController < ApplicationController
   # POST /tasks
   # POST /tasks.json
   def create
-    todo_list = TodoList.find(params[:todo_list_id])
-    @task = todo_list.tasks.new(task_params)
+    @task = @todo_list.tasks.new(task_params)
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to todo_list_task_path(@task.todo_list, @task), notice: 'Task was successfully created.' }
+        format.html { redirect_to todo_list_task_path(@todo_list, @task), notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to todo_list_task_path(@task.todo_list, @task), notice: 'Task was successfully updated.' }
+        format.html { redirect_to todo_list_task_path(@todo_list, @task), notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to todo_list_tasks_url, notice: 'Task was successfully destroyed.' }
+      format.html { redirect_to todo_list_url(@todo_list), notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -66,6 +66,10 @@ class TasksController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
+    end
+
+    def set_todo_list
+      @todo_list = TodoList.find(params[:todo_list_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
