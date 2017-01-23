@@ -2,6 +2,8 @@
 
 Simple Ruby on Rails to-do app
 
+Features:
+
 * Show all items
 * Filter to show only un-completed items
 * Show a single item
