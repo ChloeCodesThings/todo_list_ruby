@@ -21,6 +21,13 @@
       <tr>
         <td><%= link_to task.title, todo_list_task_path(task.todo_list, task) %></td>
         <td><%= task.completed %></td>
+        
+        <% if !task.completed %>
+          <td><%= link_to 'Mark As Done', todo_list_task_path(task.todo_list, task, "task[completed]" => "1"), method: :put %></td>
+        <% else %>
+          <td><%= link_to 'Mark As Undone', todo_list_task_path(task.todo_list, task, "task[completed]" => "0"), method: :put %></td>
+        <% end %>
+
         <td><%= link_to 'Delete', todo_list_task_path(task.todo_list, task), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
